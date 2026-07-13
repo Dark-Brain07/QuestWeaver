@@ -1,8 +1,21 @@
+@import "tailwindcss";
 @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap');
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@theme {
+  --color-doodle-pink: #ff9ebd;
+  --color-doodle-blue: #85d1fb;
+  --color-doodle-yellow: #fcf195;
+  --color-doodle-purple: #c6bcf6;
+  --color-doodle-mint: #b6f0e4;
+  --color-doodle-bg: #faf8f5;
+  --color-doodle-dark: #1a1a1a;
+  
+  --font-sans: "Comic Sans MS", "Nunito", sans-serif;
+  --font-display: "Fredoka One", "Nunito", sans-serif;
+  
+  --shadow-brutal: 4px 4px 0px 0px rgba(26,26,26,1);
+  --shadow-brutal-lg: 8px 8px 0px 0px rgba(26,26,26,1);
+}
 
 body {
   @apply bg-doodle-bg text-doodle-dark antialiased selection:bg-doodle-pink selection:text-white;
