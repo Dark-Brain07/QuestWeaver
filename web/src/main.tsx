@@ -7,7 +7,7 @@ import { PrivyProvider } from '@privy-io/react-auth'
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <PrivyProvider
-      appId="cmr8kltbt01o30cjxfo21lac1"
+      appId="cmrin2gkc00j80dl1ew90zgen"
       config={{
         appearance: { theme: 'light', accentColor: '#ff9ebd' },
         loginMethods: ['email', 'wallet'],
