@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@privy-io/react-auth": "^3.34.0",
-    "@tailwindcss/vite": "^4.3.2",
+    "@tailwindcss/postcss": "^4.3.2",
     "framer-motion": "^12.42.2",
     "genlayer-js": "^1.1.8",
     "lucide-react": "^1.24.0",
@@ -28,6 +28,6 @@
     "postcss": "^8.5.18",
     "tailwindcss": "^4.3.2",
     "typescript": "~6.0.2",
-    "vite": "^8.1.1"
+    "vite": "^6.0.0"
   }
 }
