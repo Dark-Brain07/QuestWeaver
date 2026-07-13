@@ -19,6 +19,8 @@
     "react-dom": "^19.2.7"
   },
   "devDependencies": {
+    "@solana-program/system": "^0.12.2",
+    "@solana/kit": "^7.0.0",
     "@types/node": "^24.13.2",
     "@types/react": "^19.2.17",
     "@types/react-dom": "^19.2.3",
@@ -28,6 +30,6 @@
     "postcss": "^8.5.18",
     "tailwindcss": "^4.3.2",
     "typescript": "~6.0.2",
-    "vite": "^6.0.0"
+    "vite": "^5.4.11"
   }
 }
