@@ -1,7 +1,7 @@
 import { createClient, createAccount } from "genlayer-js";
 import { testnetBradbury } from "genlayer-js/chains";
 
-export const CONTRACT = "0x29c38B2dd99c51A99d4fe85a5c8A7D42F2260578";
+export const CONTRACT: string = "0x29c38B2dd99c51A99d4fe85a5c8A7D42F2260578";
 export const CHAIN_ID = 4221;
 export const RPC = "https://rpc-bradbury.genlayer.com";
 export const EXPLORER = "https://explorer-bradbury.genlayer.com";
@@ -52,7 +52,7 @@ export async function writeWith(provider: any, account: string, functionName: st
   const hash = await client.writeContract({ address: CONTRACT, functionName, args, value });
   
   try {
-    await client.waitForTransactionReceipt({ hash, state: "ACCEPTED", interval: 5000, retries: 60 });
+    await client.waitForTransactionReceipt({ hash, status: "ACCEPTED", interval: 5000, retries: 60 } as any);
   } catch { /* wait timeout */ }
   return hash as string;
 }
