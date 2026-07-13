@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { usePrivy, useWallets } from "@privy-io/react-auth";
-import { CONTRACT, EXPLORER, CHAIN_ID, getStats, getRealm, getQuest, getSubmission, getCanon, writeWith, type Realm, type Quest, type Submission } from "./lib/contract";
+import { CONTRACT, CHAIN_ID, getStats, getRealm, getQuest, getSubmission, writeWith, type Realm, type Quest, type Submission } from "./lib/contract";
 import { Sparkles, ScrollText, Sword, CheckCircle, XCircle } from "lucide-react";
 
-const L = "font-mono text-[10px] uppercase tracking-[0.2em]";
+const L = "font-display text-[12px] uppercase tracking-widest text-doodle-dark";
 const short = (a: string) => (a ? a.slice(0, 6) + "…" + a.slice(-4) : "");
 
 export default function App() {
@@ -18,7 +18,6 @@ export default function App() {
   const [quests, setQuests] = useState<Quest[]>([]);
   const [submissions, setSubmissions] = useState<Submission[]>([]);
   
-  // Forms
   const [realmForm, setRealmForm] = useState({ name: "", laws: "" });
   const [questForm, setQuestForm] = useState({ realm_id: "", title: "", description: "", bounty: "" });
   const [loreForm, setLoreForm] = useState({ quest_id: "", content: "" });
@@ -49,7 +48,6 @@ export default function App() {
         if (sub && sub.id) subs.push(sub);
       }
       setSubmissions(subs);
-      
     } catch (e) {
       console.error(e);
     }
@@ -78,25 +76,23 @@ export default function App() {
   const evaluate = (id: string) => tx("evaluate_submission", [id]);
 
   return (
-    <div className="min-h-screen text-quest-primary font-sans relative overflow-x-hidden">
-      {/* Background elements */}
-      <div className="fixed top-[-20%] right-[-10%] w-[600px] h-[600px] bg-quest-accent/10 rounded-full blur-[150px] pointer-events-none z-0" />
-      <div className="fixed bottom-[-20%] left-[-10%] w-[500px] h-[500px] bg-quest-gold/5 rounded-full blur-[120px] pointer-events-none z-0" />
-
+    <div className="min-h-screen text-doodle-dark font-sans relative overflow-x-hidden">
       {/* Header */}
-      <header className="sticky top-0 z-50 bg-quest-dark/80 backdrop-blur-xl border-b border-white/10">
-        <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-          <div className="flex items-center space-x-3">
-            <Sparkles className="w-6 h-6 text-quest-accent" />
-            <span className={`${L} font-bold text-white tracking-[0.3em]`}>QuestWeaver</span>
+      <header className="sticky top-0 z-50 bg-doodle-bg/80 backdrop-blur-xl border-b-4 border-doodle-dark">
+        <div className="max-w-7xl mx-auto px-6 h-24 flex items-center justify-between">
+          <div className="flex items-center space-x-4">
+            <div className="w-12 h-12 bg-doodle-pink border-4 border-doodle-dark rounded-xl flex items-center justify-center shadow-brutal -rotate-3">
+              <Sparkles className="w-6 h-6 text-white" fill="white" />
+            </div>
+            <span className="font-display text-3xl font-black text-doodle-dark uppercase tracking-tight">QuestWeaver</span>
           </div>
           <div>
             {authenticated ? (
-              <button onClick={() => logout()} className="px-5 py-2 rounded-full font-mono text-[10px] uppercase tracking-widest border border-white/20 hover:bg-white/5 transition-colors">
+              <button onClick={() => logout()} className="px-6 py-3 rounded-2xl font-display text-sm uppercase tracking-widest bg-white text-doodle-dark brutal-button">
                 {short(acct)} (Logout)
               </button>
             ) : (
-              <button onClick={login} className="px-5 py-2 rounded-full font-mono text-[10px] uppercase tracking-widest bg-quest-accent text-white hover:bg-quest-accent/80 transition-colors shadow-[0_0_20px_rgba(139,92,246,0.3)]">
+              <button onClick={login} className="px-6 py-3 rounded-2xl font-display text-sm uppercase tracking-widest bg-doodle-blue text-doodle-dark brutal-button">
                 Connect Wallet
               </button>
             )}
@@ -105,7 +101,7 @@ export default function App() {
       </header>
 
       {CONTRACT === "0x0" && (
-        <div className="bg-red-500/20 border border-red-500/50 text-red-200 p-4 text-center font-mono text-sm">
+        <div className="bg-doodle-pink border-b-4 border-doodle-dark text-doodle-dark font-bold p-4 text-center font-display text-sm">
           ⚠️ Smart contract not yet deployed. Update CONTRACT in src/lib/contract.ts
         </div>
       )}
@@ -113,75 +109,76 @@ export default function App() {
       <main className="max-w-7xl mx-auto px-6 py-16 relative z-10 space-y-24">
         
         {/* Hero */}
-        <section className="text-center max-w-3xl mx-auto">
-          <h1 className="font-serif text-5xl md:text-7xl font-light mb-6">
-            Weave the <span className="text-transparent bg-clip-text bg-gradient-to-r from-quest-accent to-quest-gold italic">Mythos</span>.
+        <section className="text-center max-w-4xl mx-auto">
+          <h1 className="font-display text-6xl md:text-8xl font-black mb-8 leading-[1.1] text-doodle-dark">
+            Weave the <br/>
+            <span className="inline-block bg-doodle-yellow px-4 border-4 border-doodle-dark rounded-3xl shadow-brutal rotate-2 mt-4 text-doodle-dark">Mythos</span>
           </h1>
-          <p className="text-quest-secondary text-lg font-light leading-relaxed mb-10">
-            A decentralized bounty-driven lore engine. Create Realms, post Quests with GEN token bounties, and let the AI Quest Master automatically evaluate submissions and settle payouts based on strict canon adherence.
+          <p className="font-sans text-xl font-bold leading-relaxed mb-12 max-w-2xl mx-auto">
+            A playful, bounty-driven lore engine. Create Realms, post Quests with GEN bounties, and let the GenLayer AI Quest Master automatically evaluate submissions!
           </p>
-          <div className="flex justify-center gap-6 font-mono">
-            <div className="glass-panel px-6 py-4 rounded-2xl"><div className="text-[10px] text-quest-secondary mb-1 uppercase tracking-widest">Realms</div><div className="text-2xl text-white">{stats.realms}</div></div>
-            <div className="glass-panel px-6 py-4 rounded-2xl"><div className="text-[10px] text-quest-secondary mb-1 uppercase tracking-widest">Quests</div><div className="text-2xl text-white">{stats.quests}</div></div>
-            <div className="glass-panel px-6 py-4 rounded-2xl"><div className="text-[10px] text-quest-secondary mb-1 uppercase tracking-widest">Submissions</div><div className="text-2xl text-quest-accent">{stats.submissions}</div></div>
+          <div className="flex justify-center gap-6">
+            <div className="brutal-card bg-doodle-pink px-8 py-6"><div className="font-display text-xs uppercase tracking-widest mb-2 font-bold">Realms</div><div className="font-display text-4xl">{stats.realms}</div></div>
+            <div className="brutal-card bg-doodle-blue px-8 py-6"><div className="font-display text-xs uppercase tracking-widest mb-2 font-bold">Quests</div><div className="font-display text-4xl">{stats.quests}</div></div>
+            <div className="brutal-card bg-doodle-mint px-8 py-6"><div className="font-display text-xs uppercase tracking-widest mb-2 font-bold">Submissions</div><div className="font-display text-4xl">{stats.submissions}</div></div>
           </div>
         </section>
 
         <div className="grid md:grid-cols-3 gap-8">
           {/* Action: Create Realm */}
-          <div className="glass-panel p-8 rounded-3xl">
-            <div className={`${L} text-quest-accent mb-6 flex items-center gap-2`}><ScrollText className="w-4 h-4"/> Create Realm</div>
-            <input value={realmForm.name} onChange={e=>setRealmForm({...realmForm, name: e.target.value})} placeholder="Realm Name (e.g. Aethelgard)" className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 mb-4 text-sm outline-none focus:border-quest-accent/50" />
-            <textarea value={realmForm.laws} onChange={e=>setRealmForm({...realmForm, laws: e.target.value})} placeholder="Fundamental Laws (e.g. Magic is fueled by soul shards. No space travel.)" className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 mb-4 text-sm outline-none focus:border-quest-accent/50 h-32 resize-none" />
-            <button onClick={createRealm} disabled={busy} className="w-full py-3 bg-white text-black font-mono text-[10px] uppercase tracking-widest rounded-xl hover:bg-quest-accent hover:text-white transition-all disabled:opacity-50">Forge Realm</button>
+          <div className="brutal-card bg-doodle-purple p-8">
+            <div className={`${L} mb-6 flex items-center gap-3 font-black bg-white inline-flex px-4 py-2 border-4 border-doodle-dark rounded-xl shadow-[2px_2px_0px_rgba(26,26,26,1)] -rotate-2`}><ScrollText className="w-5 h-5"/> Forge Realm</div>
+            <input value={realmForm.name} onChange={e=>setRealmForm({...realmForm, name: e.target.value})} placeholder="Realm Name..." className="brutal-input mb-4" />
+            <textarea value={realmForm.laws} onChange={e=>setRealmForm({...realmForm, laws: e.target.value})} placeholder="Fundamental Laws..." className="brutal-input mb-4 h-32 resize-none" />
+            <button onClick={createRealm} disabled={busy} className="w-full py-4 bg-white text-doodle-dark brutal-button disabled:opacity-50">Create</button>
           </div>
 
           {/* Action: Post Quest */}
-          <div className="glass-panel p-8 rounded-3xl">
-            <div className={`${L} text-quest-gold mb-6 flex items-center gap-2`}><Sword className="w-4 h-4"/> Post Quest</div>
-            <select value={questForm.realm_id} onChange={e=>setQuestForm({...questForm, realm_id: e.target.value})} className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 mb-4 text-sm outline-none">
+          <div className="brutal-card bg-doodle-yellow p-8">
+            <div className={`${L} mb-6 flex items-center gap-3 font-black bg-white inline-flex px-4 py-2 border-4 border-doodle-dark rounded-xl shadow-[2px_2px_0px_rgba(26,26,26,1)] rotate-2`}><Sword className="w-5 h-5"/> Post Quest</div>
+            <select value={questForm.realm_id} onChange={e=>setQuestForm({...questForm, realm_id: e.target.value})} className="brutal-input mb-4">
               <option value="">Select Realm...</option>
               {realms.map(r => <option key={r.id} value={r.id}>{r.name} ({r.id})</option>)}
             </select>
-            <input value={questForm.title} onChange={e=>setQuestForm({...questForm, title: e.target.value})} placeholder="Quest Title" className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 mb-4 text-sm outline-none focus:border-quest-gold/50" />
-            <textarea value={questForm.description} onChange={e=>setQuestForm({...questForm, description: e.target.value})} placeholder="Description of the lore needed..." className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 mb-4 text-sm outline-none focus:border-quest-gold/50 h-20 resize-none" />
-            <input type="number" value={questForm.bounty} onChange={e=>setQuestForm({...questForm, bounty: e.target.value})} placeholder="Bounty (GEN)" className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 mb-4 text-sm outline-none focus:border-quest-gold/50" />
-            <button onClick={postQuest} disabled={busy} className="w-full py-3 bg-quest-gold/10 text-quest-gold border border-quest-gold/30 font-mono text-[10px] uppercase tracking-widest rounded-xl hover:bg-quest-gold hover:text-black transition-all disabled:opacity-50">Post Quest</button>
+            <input value={questForm.title} onChange={e=>setQuestForm({...questForm, title: e.target.value})} placeholder="Quest Title" className="brutal-input mb-4" />
+            <textarea value={questForm.description} onChange={e=>setQuestForm({...questForm, description: e.target.value})} placeholder="Describe what lore you need..." className="brutal-input mb-4 h-20 resize-none" />
+            <input type="number" value={questForm.bounty} onChange={e=>setQuestForm({...questForm, bounty: e.target.value})} placeholder="Bounty (GEN)" className="brutal-input mb-4" />
+            <button onClick={postQuest} disabled={busy} className="w-full py-4 bg-white text-doodle-dark brutal-button disabled:opacity-50">Post Quest</button>
           </div>
 
           {/* Action: Submit Lore */}
-          <div className="glass-panel p-8 rounded-3xl">
-            <div className={`${L} text-white mb-6 flex items-center gap-2`}><Sparkles className="w-4 h-4"/> Submit Lore</div>
-            <select value={loreForm.quest_id} onChange={e=>setLoreForm({...loreForm, quest_id: e.target.value})} className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 mb-4 text-sm outline-none">
+          <div className="brutal-card bg-doodle-mint p-8">
+            <div className={`${L} mb-6 flex items-center gap-3 font-black bg-white inline-flex px-4 py-2 border-4 border-doodle-dark rounded-xl shadow-[2px_2px_0px_rgba(26,26,26,1)] -rotate-1`}><Sparkles className="w-5 h-5"/> Submit Lore</div>
+            <select value={loreForm.quest_id} onChange={e=>setLoreForm({...loreForm, quest_id: e.target.value})} className="brutal-input mb-4">
               <option value="">Select Open Quest...</option>
               {quests.filter(q => q.status === "OPEN").map(q => <option key={q.id} value={q.id}>{q.title} ({q.bounty} GEN)</option>)}
             </select>
-            <textarea value={loreForm.content} onChange={e=>setLoreForm({...loreForm, content: e.target.value})} placeholder="Write your submission here. Adhere strictly to the Realm Laws..." className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 mb-4 text-sm outline-none focus:border-white/50 h-44 resize-none" />
-            <button onClick={submitLore} disabled={busy} className="w-full py-3 bg-white/10 text-white border border-white/20 font-mono text-[10px] uppercase tracking-widest rounded-xl hover:bg-white hover:text-black transition-all disabled:opacity-50">Submit Lore</button>
+            <textarea value={loreForm.content} onChange={e=>setLoreForm({...loreForm, content: e.target.value})} placeholder="Write your lore here..." className="brutal-input mb-4 h-44 resize-none" />
+            <button onClick={submitLore} disabled={busy} className="w-full py-4 bg-white text-doodle-dark brutal-button disabled:opacity-50">Submit</button>
           </div>
         </div>
 
         {/* Boards */}
         <section className="space-y-16">
           <div>
-            <h2 className="font-serif text-3xl mb-8">Active Quests</h2>
-            <div className="grid md:grid-cols-2 gap-6">
-              {quests.length === 0 && <div className="text-quest-secondary font-mono text-sm">No quests posted yet.</div>}
+            <h2 className="font-display text-4xl mb-8 font-black bg-doodle-yellow inline-block px-4 py-2 border-4 border-doodle-dark shadow-brutal -rotate-1 rounded-2xl">Active Quests</h2>
+            <div className="grid md:grid-cols-2 gap-8 mt-6">
+              {quests.length === 0 && <div className="font-bold text-lg">No quests posted yet.</div>}
               {quests.map(q => {
                 const realm = realms.find(r => r.id === q.realm_id);
                 return (
-                  <div key={q.id} className="glass-panel p-6 rounded-2xl border-l-4 border-l-quest-gold">
+                  <div key={q.id} className="brutal-card bg-white p-6">
                     <div className="flex justify-between items-start mb-4">
                       <div>
-                        <div className="font-mono text-[10px] text-quest-gold uppercase tracking-widest mb-1">{q.id} · {realm?.name}</div>
-                        <div className="text-xl font-medium">{q.title}</div>
+                        <div className="font-display text-[10px] text-doodle-dark/60 uppercase tracking-widest mb-2 font-black">{q.id} · {realm?.name}</div>
+                        <div className="font-display text-2xl font-black">{q.title}</div>
                       </div>
-                      <div className="bg-quest-gold/20 text-quest-gold px-3 py-1 rounded-full font-mono text-[10px]">{Number(q.bounty)/1e18} GEN</div>
+                      <div className="bg-doodle-yellow border-2 border-doodle-dark px-4 py-2 rounded-xl font-display font-black text-sm shadow-[2px_2px_0px_rgba(26,26,26,1)] rotate-3">{Number(q.bounty)/1e18} GEN</div>
                     </div>
-                    <p className="text-quest-secondary text-sm mb-4">{q.description}</p>
-                    <div className="flex justify-between items-center text-[10px] font-mono">
-                      <span className="text-white/40">By {short(q.creator)}</span>
-                      <span className={q.status === "OPEN" ? "text-green-400" : "text-white/50"}>{q.status}</span>
+                    <p className="font-bold text-doodle-dark/80 mb-6">{q.description}</p>
+                    <div className="flex justify-between items-center text-xs font-display font-black uppercase">
+                      <span>By {short(q.creator)}</span>
+                      <span className={`px-3 py-1 border-2 border-doodle-dark rounded-lg shadow-[2px_2px_0px_rgba(26,26,26,1)] ${q.status === "OPEN" ? "bg-doodle-mint" : "bg-white"}`}>{q.status}</span>
                     </div>
                   </div>
                 )
@@ -190,32 +187,34 @@ export default function App() {
           </div>
 
           <div>
-            <h2 className="font-serif text-3xl mb-8">Submissions & Verdicts</h2>
-            <div className="space-y-4">
-              {submissions.length === 0 && <div className="text-quest-secondary font-mono text-sm">No submissions yet.</div>}
+            <h2 className="font-display text-4xl mb-8 font-black bg-doodle-pink inline-block px-4 py-2 border-4 border-doodle-dark shadow-brutal rotate-1 rounded-2xl text-white">Submissions</h2>
+            <div className="space-y-6 mt-6">
+              {submissions.length === 0 && <div className="font-bold text-lg">No submissions yet.</div>}
               {submissions.map(s => {
                 const quest = quests.find(q => q.id === s.quest_id);
                 return (
-                  <div key={s.id} className="glass-panel p-6 rounded-2xl flex flex-col md:flex-row gap-6 items-start">
+                  <div key={s.id} className="brutal-card bg-white p-6 flex flex-col md:flex-row gap-8 items-start">
                     <div className="flex-1">
-                      <div className="font-mono text-[10px] text-quest-accent uppercase tracking-widest mb-2">{s.id} · For {quest?.title || s.quest_id}</div>
-                      <p className="text-sm text-quest-primary/90 italic mb-4">"{s.content}"</p>
+                      <div className="font-display text-[10px] text-doodle-dark/60 uppercase tracking-widest mb-3 font-black">{s.id} · For {quest?.title || s.quest_id}</div>
+                      <p className="font-bold text-lg leading-relaxed mb-4">"{s.content}"</p>
                       {s.reasoning && (
-                        <div className="bg-black/30 p-3 rounded-lg border border-white/5 text-xs text-quest-secondary">
-                          <span className="text-white/60 font-mono">Quest Master: </span>
+                        <div className="bg-doodle-blue/20 border-2 border-doodle-dark p-4 rounded-xl text-sm font-bold">
+                          <span className="font-display uppercase tracking-widest text-xs opacity-70 block mb-1">Quest Master: </span>
                           {s.reasoning}
                         </div>
                       )}
                     </div>
-                    <div className="w-full md:w-48 shrink-0 flex flex-col gap-3">
+                    <div className="w-full md:w-56 shrink-0 flex flex-col gap-4">
                       {s.status === "PENDING" ? (
                         <>
-                          <div className="text-quest-gold font-mono text-[10px] tracking-widest uppercase flex items-center gap-1"><div className="w-2 h-2 bg-quest-gold rounded-full animate-pulse"/> PENDING</div>
-                          <button onClick={() => evaluate(s.id)} disabled={busy} className="px-4 py-2 bg-quest-accent/20 text-quest-accent border border-quest-accent/30 rounded-xl font-mono text-[10px] uppercase tracking-widest hover:bg-quest-accent hover:text-white transition-all disabled:opacity-50">Adjudicate</button>
+                          <div className="font-display text-sm tracking-widest uppercase flex items-center gap-2 font-black bg-doodle-yellow/30 px-3 py-2 rounded-xl border-2 border-doodle-dark">
+                            <div className="w-3 h-3 bg-doodle-yellow border-2 border-doodle-dark rounded-full animate-pulse"/> PENDING
+                          </div>
+                          <button onClick={() => evaluate(s.id)} disabled={busy} className="w-full py-4 bg-doodle-pink text-white brutal-button disabled:opacity-50">Adjudicate</button>
                         </>
                       ) : (
-                        <div className={`font-mono text-[11px] tracking-widest uppercase flex items-center gap-2 ${s.verdict === 'APPROVED' ? 'text-green-400' : 'text-red-400'}`}>
-                          {s.verdict === 'APPROVED' ? <CheckCircle className="w-4 h-4"/> : <XCircle className="w-4 h-4"/>}
+                        <div className={`font-display text-sm tracking-widest uppercase flex items-center gap-2 font-black px-4 py-3 rounded-xl border-2 border-doodle-dark shadow-[2px_2px_0px_rgba(26,26,26,1)] ${s.verdict === 'APPROVED' ? 'bg-doodle-mint' : 'bg-red-400 text-white'}`}>
+                          {s.verdict === 'APPROVED' ? <CheckCircle className="w-5 h-5"/> : <XCircle className="w-5 h-5"/>}
                           {s.verdict}
                         </div>
                       )}

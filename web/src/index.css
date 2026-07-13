@@ -1,28 +1,38 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Merriweather:ital,wght@0,300;0,400;0,700;1,300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 body {
-  @apply bg-quest-dark text-quest-primary antialiased;
+  @apply bg-doodle-bg text-doodle-dark antialiased selection:bg-doodle-pink selection:text-white;
+  background-image: radial-gradient(#e5e5e5 1px, transparent 1px);
+  background-size: 20px 20px;
 }
 
-.glass-panel {
-  @apply bg-quest-card/60 backdrop-blur-md border border-white/5;
+.brutal-card {
+  @apply bg-white border-4 border-doodle-dark rounded-3xl shadow-brutal transition-transform hover:-translate-y-1 hover:-translate-x-1 hover:shadow-brutal-lg;
+}
+
+.brutal-input {
+  @apply w-full bg-white border-4 border-doodle-dark rounded-2xl px-5 py-3 text-sm font-sans font-bold outline-none focus:border-doodle-pink focus:shadow-brutal transition-all placeholder-doodle-dark/40;
+}
+
+.brutal-button {
+  @apply border-4 border-doodle-dark font-display text-sm tracking-widest rounded-2xl shadow-brutal hover:-translate-y-1 hover:-translate-x-1 hover:shadow-brutal-lg active:translate-y-0 active:translate-x-0 active:shadow-none transition-all;
 }
 
 /* Scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 12px;
+  height: 12px;
 }
 ::-webkit-scrollbar-track {
-  background: transparent;
+  @apply bg-doodle-bg border-l-4 border-doodle-dark;
 }
 ::-webkit-scrollbar-thumb {
-  @apply bg-white/10 rounded-full;
+  @apply bg-doodle-blue border-4 border-doodle-dark rounded-full;
 }
 ::-webkit-scrollbar-thumb:hover {
-  @apply bg-white/20;
+  @apply bg-doodle-pink;
 }
