@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { usePrivy, useWallets } from "@privy-io/react-auth";
-import { CONTRACT, EXPLORER, CHAIN_ID, getStats, getRealm, getQuest, getSubmission, getCanon, writeWith, Realm, Quest, Submission } from "./lib/contract";
+import { CONTRACT, EXPLORER, CHAIN_ID, getStats, getRealm, getQuest, getSubmission, getCanon, writeWith, type Realm, type Quest, type Submission } from "./lib/contract";
 import { Sparkles, ScrollText, Sword, CheckCircle, XCircle } from "lucide-react";
 
 const L = "font-mono text-[10px] uppercase tracking-[0.2em]";
