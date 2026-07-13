@@ -7,7 +7,7 @@ const L = "font-display text-[12px] uppercase tracking-widest text-doodle-dark";
 const short = (a: string) => (a ? a.slice(0, 6) + "…" + a.slice(-4) : "");
 
 export default function App() {
-  const { ready, authenticated, login, logout } = usePrivy();
+  const { authenticated, login, logout } = usePrivy();
   const { wallets } = useWallets();
   const wallet = wallets[0];
   const acct = wallet?.address || "";
