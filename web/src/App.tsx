@@ -80,20 +80,20 @@ export default function App() {
       {/* Header */}
       <header className="sticky top-0 z-50 bg-doodle-bg/80 backdrop-blur-xl border-b-4 border-doodle-dark">
         <div className="max-w-7xl mx-auto px-6 h-24 flex items-center justify-between">
-          <div className="flex items-center space-x-4">
-            <div className="w-12 h-12 bg-doodle-pink border-4 border-doodle-dark rounded-xl flex items-center justify-center shadow-brutal -rotate-3">
-              <Sparkles className="w-6 h-6 text-white" fill="white" />
+          <div className="flex items-center space-x-2 md:space-x-4">
+            <div className="w-10 h-10 md:w-12 md:h-12 bg-doodle-pink border-4 border-doodle-dark rounded-xl flex items-center justify-center shadow-brutal -rotate-3">
+              <Sparkles className="w-5 h-5 md:w-6 md:h-6 text-white" fill="white" />
             </div>
-            <span className="font-display text-3xl font-black text-doodle-dark uppercase tracking-tight">QuestWeaver</span>
+            <span className="font-display text-xl md:text-3xl font-black text-doodle-dark uppercase tracking-tight">QuestWeaver</span>
           </div>
-          <div>
+          <div className="translate-x-2 md:translate-x-0">
             {authenticated ? (
-              <button onClick={() => logout()} className="px-6 py-3 rounded-2xl font-display text-sm uppercase tracking-widest bg-white text-doodle-dark brutal-button">
-                {short(acct)} (Logout)
+              <button onClick={() => logout()} className="px-4 py-2 md:px-6 md:py-3 rounded-2xl font-display text-xs md:text-sm uppercase tracking-widest bg-white text-doodle-dark brutal-button">
+                {short(acct)} <span className="hidden md:inline">(Logout)</span>
               </button>
             ) : (
-              <button onClick={login} className="px-6 py-3 rounded-2xl font-display text-sm uppercase tracking-widest bg-doodle-blue text-doodle-dark brutal-button">
-                Connect Wallet
+              <button onClick={login} className="px-4 py-2 md:px-6 md:py-3 rounded-2xl font-display text-xs md:text-sm uppercase tracking-widest bg-doodle-blue text-doodle-dark brutal-button">
+                Connect <span className="hidden md:inline">Wallet</span>
               </button>
             )}
           </div>
@@ -117,7 +117,7 @@ export default function App() {
           <p className="font-sans text-xl font-bold leading-relaxed mb-12 max-w-2xl mx-auto">
             A playful, bounty-driven lore engine. Create Realms, post Quests with GEN bounties, and let the GenLayer AI Quest Master automatically evaluate submissions!
           </p>
-          <div className="flex justify-center gap-6">
+          <div className="flex flex-col sm:flex-row justify-center gap-4 md:gap-6">
             <div className="brutal-card bg-doodle-pink px-8 py-6"><div className="font-display text-xs uppercase tracking-widest mb-2 font-bold">Realms</div><div className="font-display text-4xl">{stats.realms}</div></div>
             <div className="brutal-card bg-doodle-blue px-8 py-6"><div className="font-display text-xs uppercase tracking-widest mb-2 font-bold">Quests</div><div className="font-display text-4xl">{stats.quests}</div></div>
             <div className="brutal-card bg-doodle-mint px-8 py-6"><div className="font-display text-xs uppercase tracking-widest mb-2 font-bold">Submissions</div><div className="font-display text-4xl">{stats.submissions}</div></div>
