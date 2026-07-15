@@ -1,7 +1,7 @@
 import { createClient, createAccount } from "genlayer-js";
 import { testnetBradbury } from "genlayer-js/chains";
 
-export const CONTRACT: `0x${string}` = "0x7e2AFF7BF93E226b03Ba54BB8391CDa5FE6Cc6f7";
+export const CONTRACT: `0x${string}` = "0xc500be98B76460C0899267E0145536c2f2510EF2";
 export const CHAIN_ID = 4221;
 export const RPC = "https://rpc-bradbury.genlayer.com";
 export const EXPLORER = "https://explorer-bradbury.genlayer.com";

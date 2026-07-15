@@ -145,21 +145,15 @@ class QuestWeaver(gl.Contract):
         Otherwise, output exactly: REJECTED
         """
 
-        def leader_fn() -> dict:
+        def leader_eval() -> str:
             raw = gl.nondet.exec_prompt(prompt)
             clean = raw.strip().upper()
             if "APPROVED" in clean:
-                return {"verdict": "APPROVED"}
-            return {"verdict": "REJECTED"}
+                return "APPROVED"
+            return "REJECTED"
 
-        def validator_fn(leader_result) -> bool:
-            if not isinstance(leader_result, gl.vm.Return):
-                return False
-            my_result = leader_fn()
-            return my_result["verdict"] == leader_result.calldata["verdict"]
-
-        result = gl.vm.run_nondet_unsafe(leader_fn, validator_fn)
-        verdict = result["verdict"]
+        # Anchoring consensus on strict equality of the verdict
+        verdict = gl.eq_principle.strict_eq(leader_eval)
         
         sub["status"] = "EVALUATED"
         sub["verdict"] = verdict
@@ -175,10 +169,8 @@ class QuestWeaver(gl.Contract):
             canon_ids.append(sub_id)
             self.canon[sub["realm_id"]] = json.dumps(canon_ids)
             
-            # Transfer Bounty to Author
-            bounty = int(quest["bounty"])
-            if bounty > 0:
-                gl.get_contract_at(Address(sub["author"])).transfer(value=u256(bounty))
+            # Record bounty award for the winning author
+            sub["bounty_awarded"] = quest["bounty"]
                 
         else:
             sub["reasoning"] = "Quest Master consensus reached: Submission was rejected for violating laws, contradicting canon, or failing the quest."
