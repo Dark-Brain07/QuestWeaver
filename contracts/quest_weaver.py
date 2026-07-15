@@ -145,15 +145,21 @@ class QuestWeaver(gl.Contract):
         Otherwise, output exactly: REJECTED
         """
 
-        def leader_eval() -> str:
+        def leader_fn() -> dict:
             raw = gl.nondet.exec_prompt(prompt)
             clean = raw.strip().upper()
             if "APPROVED" in clean:
-                return "APPROVED"
-            return "REJECTED"
+                return {"verdict": "APPROVED"}
+            return {"verdict": "REJECTED"}
 
-        # Anchoring consensus on strict equality of the verdict
-        verdict = gl.eq_principle.strict_eq(leader_eval)
+        def validator_fn(leader_result) -> bool:
+            if not isinstance(leader_result, gl.vm.Return):
+                return False
+            my_result = leader_fn()
+            return my_result["verdict"] == leader_result.calldata["verdict"]
+
+        result = gl.vm.run_nondet_unsafe(leader_fn, validator_fn)
+        verdict = result["verdict"]
         
         sub["status"] = "EVALUATED"
         sub["verdict"] = verdict
