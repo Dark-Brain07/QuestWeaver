@@ -35,7 +35,7 @@ QuestWeaver is a decentralized world-building engine on GenLayer. It allows comm
 **Evidence & Supporting Information:**
 
 **URL**
-https://studio.genlayer.com/contracts?import-contract=0x29c38B2dd99c51A99d4fe85a5c8A7D42F2260578
+https://studio.genlayer.com/contracts?import-contract=0x7e2AFF7BF93E226b03Ba54BB8391CDa5FE6Cc6f7
 **Type:** GenLayer Studio Contract
 
 **URL**
@@ -52,6 +52,6 @@ https://github.com/Dark-Brain07/QuestWeaver
 **Description:**
 A specialized Python Intelligent Contract utilizing GenLayer's non-deterministic LLM execution. It maintains dynamic state arrays of narrative canon and strictly evaluates new textual submissions against predefined on-chain rules (Realm Laws) using `gl.eq_principle.strict_eq` before executing native GEN value transfers.
 
-- **Contract Address:** `0x29c38B2dd99c51A99d4fe85a5c8A7D42F2260578`
-- **Explorer Link:** [View on GenLayer Studio](https://studio.genlayer.com/contracts?import-contract=0x29c38B2dd99c51A99d4fe85a5c8A7D42F2260578)
+- **Contract Address:** `0x7e2AFF7BF93E226b03Ba54BB8391CDa5FE6Cc6f7`
+- **Explorer Link:** [View on GenLayer Studio](https://studio.genlayer.com/contracts?import-contract=0x7e2AFF7BF93E226b03Ba54BB8391CDa5FE6Cc6f7)
 - **Source Code:** [quest_weaver.py](https://github.com/Dark-Brain07/QuestWeaver/blob/main/contracts/quest_weaver.py)
