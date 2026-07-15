@@ -172,7 +172,7 @@ class QuestWeaver(gl.Contract):
             # Transfer Bounty to Author
             bounty = int(quest["bounty"])
             if bounty > 0:
-                gl.get_contract_at(Address(sub["author"])).emit_transfer(value=u256(bounty))
+                gl.get_contract_at(Address(sub["author"])).transfer(value=u256(bounty))
                 
         else:
             sub["reasoning"] = "Quest Master consensus reached: Submission was rejected for violating laws, contradicting canon, or failing the quest."
