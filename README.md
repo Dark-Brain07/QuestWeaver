@@ -4,6 +4,11 @@ QuestWeaver is a **bounty-driven decentralized lore engine** built on the GenLay
 
 If a writer submits Lore that fits the Realm's Laws, perfectly aligns with the Existing Canon, and fulfills a Quest, the GenLayer consensus automatically approves it and releases a GEN bounty directly to the author!
 
+## 🚀 Live Deployment (Bradbury Testnet)
+
+- **Contract Address:** `0x4204AD837CdaD89bC4f3944FF0C54a7492855C66`
+- **Explorer Link:** [View on GenLayer Explorer](https://explorer-bradbury.genlayer.com/address/0x4204AD837CdaD89bC4f3944FF0C54a7492855C66)
+
 ---
 
 ## 🌟 How it Works
