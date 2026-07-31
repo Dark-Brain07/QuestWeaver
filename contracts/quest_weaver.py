@@ -154,19 +154,24 @@ class QuestWeaver(gl.Contract):
         3. Does it contradict the Existing Canon?
         4. Is it a high-quality, creative contribution?
         
-        If yes to all, output exactly: APPROVED
-        Otherwise, output exactly: REJECTED
+        You MUST return a JSON object with two keys:
+        1. "reasoning": A short explanation of your evaluation.
+        2. "verdict": Exactly "APPROVED" or "REJECTED".
         """
 
         def leader_eval() -> str:
-            raw = gl.nondet.exec_prompt(prompt)
-            clean = raw.strip().upper()
-            if "APPROVED" in clean:
-                return "APPROVED"
-            return "REJECTED"
+            raw = gl.nondet.exec_prompt(prompt, response_format="json")
+            return raw
 
-        # Anchoring consensus on strict equality of the verdict
-        verdict = gl.eq_principle.strict_eq(leader_eval)
+        # Anchoring consensus on strict equality of the verdict field only
+        comparator_prompt = "Equal if the 'verdict' field is exactly the same. Ignore all variations in the 'reasoning'."
+        consensus_json_str = gl.eq_principle.prompt_comparative(leader_eval, comparator_prompt)
+        
+        try:
+            consensus_data = json.loads(consensus_json_str)
+            verdict = consensus_data.get("verdict", "REJECTED").strip().upper()
+        except:
+            verdict = "REJECTED"
         
         sub["status"] = "EVALUATED"
         sub["verdict"] = verdict

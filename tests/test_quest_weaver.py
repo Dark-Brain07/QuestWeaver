@@ -49,10 +49,15 @@ class _Public:
     write = _PublicWriteDeco()
 
 class _EqPrinciple:
-    canned_output = "APPROVED"
+    canned_output = '{"verdict": "APPROVED"}'
 
     @classmethod
     def strict_eq(cls, fn):
+        cls.last_input = fn()
+        return cls.canned_output
+
+    @classmethod
+    def prompt_comparative(cls, fn, prompt):
         cls.last_input = fn()
         return cls.canned_output
 
@@ -63,7 +68,7 @@ class _Nondet:
     web = _NondetWeb()
 
     @staticmethod
-    def exec_prompt(prompt, images=None):
+    def exec_prompt(prompt, response_format=None):
         return _EqPrinciple.canned_output
 
 class _Evm:
@@ -159,7 +164,7 @@ def test_bounty_payout(qw):
     s_id = qw.submit_lore(q_id, "My lore submission")
     
     # Evaluate submission (mocked to approve)
-    _GL.eq_principle.canned_output = "APPROVED"
+    _GL.eq_principle.canned_output = '{"verdict": "APPROVED", "reasoning": "mock"}'
     res = qw.evaluate_submission(s_id)
     
     assert res == "APPROVED"
@@ -206,7 +211,7 @@ def test_rejection_no_payout(qw):
     s_id = qw.submit_lore(q_id, "Bad lore submission")
     
     # Evaluate submission (mocked to reject)
-    _GL.eq_principle.canned_output = "REJECTED"
+    _GL.eq_principle.canned_output = '{"verdict": "REJECTED", "reasoning": "mock"}'
     res = qw.evaluate_submission(s_id)
     
     assert res == "REJECTED"
