@@ -11,8 +11,8 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
       config={{
         appearance: { theme: 'light', accentColor: '#ff9ebd' },
         loginMethods: ['email', 'wallet'],
-        defaultChain: { id: 4221, name: 'Bradbury Testnet', network: 'GenLayer', nativeCurrency: { name: 'GEN', symbol: 'GEN', decimals: 18 }, rpcUrls: { default: { http: ['https://rpc-bradbury.genlayer.com'] }, public: { http: ['https://rpc-bradbury.genlayer.com'] } } } as any,
-        supportedChains: [{ id: 4221, name: 'Bradbury Testnet', network: 'GenLayer', nativeCurrency: { name: 'GEN', symbol: 'GEN', decimals: 18 }, rpcUrls: { default: { http: ['https://rpc-bradbury.genlayer.com'] }, public: { http: ['https://rpc-bradbury.genlayer.com'] } } } as any]
+        defaultChain: { id: 61999, name: 'GenLayer Studio', network: 'GenLayer', nativeCurrency: { name: 'GEN', symbol: 'GEN', decimals: 18 }, rpcUrls: { default: { http: ['https://studio.genlayer.com/api'] }, public: { http: ['https://studio.genlayer.com/api'] } } } as any,
+        supportedChains: [{ id: 61999, name: 'GenLayer Studio', network: 'GenLayer', nativeCurrency: { name: 'GEN', symbol: 'GEN', decimals: 18 }, rpcUrls: { default: { http: ['https://studio.genlayer.com/api'] }, public: { http: ['https://studio.genlayer.com/api'] } } } as any]
       }}
     >
       <App />
