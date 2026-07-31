@@ -86,6 +86,10 @@ export default function App() {
               <Sparkles className="w-5 h-5 md:w-6 md:h-6 text-white" fill="white" />
             </div>
             <span className="font-display text-xl md:text-3xl font-black text-doodle-dark uppercase tracking-tight">QuestWeaver</span>
+            <div className="hidden lg:flex flex-col ml-4">
+              <span className="text-[10px] font-bold opacity-50 uppercase tracking-widest">Contract: {CONTRACT}</span>
+              <span className="text-[10px] font-bold opacity-50 uppercase tracking-widest">Network Chain ID: {CHAIN_ID}</span>
+            </div>
           </div>
           <div className="translate-x-2 md:translate-x-0">
             {authenticated ? (
