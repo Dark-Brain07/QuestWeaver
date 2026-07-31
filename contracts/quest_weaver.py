@@ -51,7 +51,9 @@ class QuestWeaver(gl.Contract):
 
     @gl.public.write.payable
     def post_quest(self, realm_id: str, title: str, description: str) -> str:
-        if not self.realms.exists(realm_id):
+        try:
+            _ = self.realms[realm_id]
+        except KeyError:
             raise gl.vm.UserError("Realm not found")
             
         bounty = int(gl.message.value)
@@ -76,7 +78,9 @@ class QuestWeaver(gl.Contract):
 
     @gl.public.write
     def submit_lore(self, quest_id: str, content: str) -> str:
-        if not self.quests.exists(quest_id):
+        try:
+            _ = self.quests[quest_id]
+        except KeyError:
             raise gl.vm.UserError("Quest not found")
             
         quest = json.loads(self.quests[quest_id])
@@ -101,7 +105,9 @@ class QuestWeaver(gl.Contract):
 
     @gl.public.write
     def evaluate_submission(self, sub_id: str) -> str:
-        if not self.submissions.exists(sub_id):
+        try:
+            _ = self.submissions[sub_id]
+        except KeyError:
             raise gl.vm.UserError("Submission not found")
             
         sub = json.loads(self.submissions[sub_id])
@@ -189,7 +195,9 @@ class QuestWeaver(gl.Contract):
 
     @gl.public.write
     def cancel_quest(self, quest_id: str) -> str:
-        if not self.quests.exists(quest_id):
+        try:
+            _ = self.quests[quest_id]
+        except KeyError:
             raise gl.vm.UserError("Quest not found")
             
         quest = json.loads(self.quests[quest_id])
@@ -210,19 +218,31 @@ class QuestWeaver(gl.Contract):
 
     @gl.public.view
     def get_realm(self, realm_id: str) -> str:
-        return self.realms.get(realm_id, "")
+        try:
+            return self.realms[realm_id]
+        except KeyError:
+            return ""
         
     @gl.public.view
     def get_quest(self, quest_id: str) -> str:
-        return self.quests.get(quest_id, "")
+        try:
+            return self.quests[quest_id]
+        except KeyError:
+            return ""
         
     @gl.public.view
     def get_submission(self, sub_id: str) -> str:
-        return self.submissions.get(sub_id, "")
+        try:
+            return self.submissions[sub_id]
+        except KeyError:
+            return ""
 
     @gl.public.view
     def get_canon(self, realm_id: str) -> str:
-        return self.canon.get(realm_id, "")
+        try:
+            return self.canon[realm_id]
+        except KeyError:
+            return ""
 
     @gl.public.view
     def get_stats(self) -> str:

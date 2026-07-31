@@ -14,11 +14,21 @@ class _UserError(Exception):
 class _VmModule:
     UserError = _UserError
 
-class _TreeMap(dict):
-    def get(self, k, default=None):
-        return super().get(k, default)
-    def exists(self, k):
-        return k in self
+class _TreeMap:
+    def __init__(self):
+        self._data = {}
+        
+    def __getitem__(self, key):
+        return self._data[key]
+        
+    def __setitem__(self, key, value):
+        self._data[key] = value
+        
+    def __contains__(self, key):
+        return key in self._data
+        
+    def __class_getitem__(cls, item):
+        return cls
 
 class _U256(int):
     def __new__(cls, v):
