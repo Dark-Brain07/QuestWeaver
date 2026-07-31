@@ -43,7 +43,7 @@ class QuestWeaver(gl.Contract):
             "id": r_id,
             "name": name.strip(),
             "laws": laws.strip(),
-            "creator": gl.message.sender_address.as_hex
+            "creator": str(gl.message.sender_address)
         }
         self.realms[r_id] = json.dumps(realm)
         self.canon[r_id] = json.dumps([])
@@ -67,7 +67,7 @@ class QuestWeaver(gl.Contract):
             "title": title.strip(),
             "description": description.strip(),
             "bounty": str(bounty),
-            "creator": gl.message.sender_address.as_hex,
+            "creator": str(gl.message.sender_address),
             "status": "OPEN",
             "winner_sub": ""
         }
@@ -91,7 +91,7 @@ class QuestWeaver(gl.Contract):
             "quest_id": quest_id,
             "realm_id": quest["realm_id"],
             "content": content.strip(),
-            "author": gl.message.sender_address.as_hex,
+            "author": str(gl.message.sender_address),
             "status": "PENDING",
             "verdict": "",
             "reasoning": ""
