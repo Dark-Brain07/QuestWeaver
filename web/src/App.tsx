@@ -74,6 +74,7 @@ export default function App() {
   const postQuest = () => tx("post_quest", [questForm.realm_id, questForm.title, questForm.description], BigInt(Number(questForm.bounty) * 1e18));
   const submitLore = () => tx("submit_lore", [loreForm.quest_id, loreForm.content]);
   const evaluate = (id: string) => tx("evaluate_submission", [id]);
+  const cancelQuest = (id: string) => tx("cancel_quest", [id]);
 
   return (
     <div className="min-h-screen text-doodle-dark font-sans relative overflow-x-hidden">
@@ -178,7 +179,12 @@ export default function App() {
                     <p className="font-bold text-doodle-dark/80 mb-6">{q.description}</p>
                     <div className="flex justify-between items-center text-xs font-display font-black uppercase">
                       <span>By {short(q.creator)}</span>
-                      <span className={`px-3 py-1 border-2 border-doodle-dark rounded-lg shadow-[2px_2px_0px_rgba(26,26,26,1)] ${q.status === "OPEN" ? "bg-doodle-mint" : "bg-white"}`}>{q.status}</span>
+                      <div className="flex gap-2">
+                        {q.status === "OPEN" && q.creator.toLowerCase() === acct.toLowerCase() && (
+                          <button onClick={() => cancelQuest(q.id)} disabled={busy} className="px-3 py-1 bg-red-400 text-white border-2 border-doodle-dark rounded-lg shadow-[2px_2px_0px_rgba(26,26,26,1)] hover:bg-red-500 disabled:opacity-50">Cancel</button>
+                        )}
+                        <span className={`px-3 py-1 border-2 border-doodle-dark rounded-lg shadow-[2px_2px_0px_rgba(26,26,26,1)] ${q.status === "OPEN" ? "bg-doodle-mint" : "bg-white"}`}>{q.status}</span>
+                      </div>
                     </div>
                   </div>
                 )

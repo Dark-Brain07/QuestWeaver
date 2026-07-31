@@ -12,6 +12,13 @@ If the Lore is highly original, fits the Laws, and fulfills the Quest, it is APP
 The Lore enters the Canon and the smart contract automatically releases the GEN bounty to the writer!
 """
 
+@gl.evm.contract_interface
+class _Payee:
+    class View:
+        pass
+    class Write:
+        pass
+
 class QuestWeaver(gl.Contract):
     realms: TreeMap[str, str]       # realm_id -> JSON string
     quests: TreeMap[str, str]       # quest_id -> JSON string
@@ -44,7 +51,7 @@ class QuestWeaver(gl.Contract):
 
     @gl.public.write.payable
     def post_quest(self, realm_id: str, title: str, description: str) -> str:
-        if realm_id not in self.realms:
+        if not self.realms.exists(realm_id):
             raise gl.vm.UserError("Realm not found")
             
         bounty = int(gl.message.value)
@@ -69,7 +76,7 @@ class QuestWeaver(gl.Contract):
 
     @gl.public.write
     def submit_lore(self, quest_id: str, content: str) -> str:
-        if quest_id not in self.quests:
+        if not self.quests.exists(quest_id):
             raise gl.vm.UserError("Quest not found")
             
         quest = json.loads(self.quests[quest_id])
@@ -94,7 +101,7 @@ class QuestWeaver(gl.Contract):
 
     @gl.public.write
     def evaluate_submission(self, sub_id: str) -> str:
-        if sub_id not in self.submissions:
+        if not self.submissions.exists(sub_id):
             raise gl.vm.UserError("Submission not found")
             
         sub = json.loads(self.submissions[sub_id])
@@ -171,12 +178,35 @@ class QuestWeaver(gl.Contract):
             
             # Record bounty award for the winning author
             sub["bounty_awarded"] = quest["bounty"]
+            if int(quest["bounty"]) > 0:
+                _Payee(Address(sub["author"])).emit_transfer(value=u256(int(quest["bounty"])), on="finalized")
                 
         else:
             sub["reasoning"] = "Quest Master consensus reached: Submission was rejected for violating laws, contradicting canon, or failing the quest."
 
         self.submissions[sub_id] = json.dumps(sub)
         return verdict
+
+    @gl.public.write
+    def cancel_quest(self, quest_id: str) -> str:
+        if not self.quests.exists(quest_id):
+            raise gl.vm.UserError("Quest not found")
+            
+        quest = json.loads(self.quests[quest_id])
+        if quest["creator"].lower() != str(gl.message.sender_address).lower():
+            raise gl.vm.UserError("Only the creator can cancel this quest")
+            
+        if quest["status"] != "OPEN":
+            raise gl.vm.UserError("Quest is not open")
+            
+        quest["status"] = "CANCELLED"
+        self.quests[quest_id] = json.dumps(quest)
+        
+        bounty = int(quest["bounty"])
+        if bounty > 0:
+            _Payee(Address(quest["creator"])).emit_transfer(value=u256(bounty), on="finalized")
+            
+        return "CANCELLED"
 
     @gl.public.view
     def get_realm(self, realm_id: str) -> str:
