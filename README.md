@@ -1,13 +1,13 @@
 # 📜 QuestWeaver
 
-QuestWeaver is a **bounty-driven decentralized lore engine** built on the GenLayer Bradbury Testnet. It empowers communities to collaboratively build narrative universes (Realms) where every addition to the canon is strictly evaluated by an AI Quest Master (GenLayer LLM). 
+QuestWeaver is a **bounty-driven decentralized lore engine** built on the GenLayer StudioNet. It empowers communities to collaboratively build narrative universes (Realms) where every addition to the canon is strictly evaluated by an AI Quest Master (GenLayer LLM). 
 
 If a writer submits Lore that fits the Realm's Laws, perfectly aligns with the Existing Canon, and fulfills a Quest, the GenLayer consensus automatically approves it and releases a GEN bounty directly to the author!
 
-## 🚀 Live Deployment (Bradbury Testnet)
+## 🚀 Live Deployment (StudioNet)
 
-- **Contract Address:** `0x368afD1D00AcA38C9429D91C6552550FAE99FF67`
-- **Explorer Link:** [View on GenLayer Explorer](https://explorer-bradbury.genlayer.com/address/0x368afD1D00AcA38C9429D91C6552550FAE99FF67)
+- **Contract Address:** `0xEeDb0B417B3134bAEAb50374c0E582E85a5ef693`
+- **Explorer Link:** [View on GenLayer Explorer](https://genlayer-explorer.vercel.app/address/0xEeDb0B417B3134bAEAb50374c0E582E85a5ef693)
 
 ---
 

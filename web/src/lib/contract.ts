@@ -1,10 +1,10 @@
 import { createClient, createAccount } from "genlayer-js";
-import { testnetBradbury } from "genlayer-js/chains";
+import { studionet } from "genlayer-js/chains";
 
-export const CONTRACT: `0x${string}` = "0x368afD1D00AcA38C9429D91C6552550FAE99FF67";
-export const CHAIN_ID = 4221;
-export const RPC = "https://rpc-bradbury.genlayer.com";
-export const EXPLORER = "https://explorer-bradbury.genlayer.com";
+export const CONTRACT: `0x${string}` = "0xEeDb0B417B3134bAEAb50374c0E582E85a5ef693";
+export const CHAIN_ID = 61999;
+export const RPC = "https://studio.genlayer.com/api";
+export const EXPLORER = "https://genlayer-explorer.vercel.app";
 
 export type Realm = {
   id: string;
@@ -35,7 +35,7 @@ export type Submission = {
   reasoning: string;
 };
 
-const reader = createClient({ chain: testnetBradbury, account: createAccount() });
+const reader = createClient({ chain: studionet, account: createAccount() });
 const read = (functionName: string, args: any[] = []) =>
   reader.readContract({ address: CONTRACT, functionName, args });
 
@@ -48,7 +48,7 @@ export const getCanon = async (realmId: string) => JSON.parse(await read("get_ca
 import { createClient as _cc } from "genlayer-js";
 
 export async function writeWith(provider: any, account: string, functionName: string, args: any[], value: bigint = 0n): Promise<string> {
-  const client = _cc({ chain: testnetBradbury, account: account as any, provider } as any);
+  const client = _cc({ chain: studionet, account: account as any, provider } as any);
   const hash = await client.writeContract({ address: CONTRACT, functionName, args, value });
   
   try {

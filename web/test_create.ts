@@ -1,12 +1,12 @@
 import { createClient, createAccount } from "genlayer-js";
-import { testnetBradbury } from "genlayer-js/chains";
+import { studionet } from "genlayer-js/chains";
 
-const CONTRACT = "0x368afD1D00AcA38C9429D91C6552550FAE99FF67";
+const CONTRACT = "0xEeDb0B417B3134bAEAb50374c0E582E85a5ef693";
 
 async function main() {
     const account = createAccount();
     console.log("Using account:", account.address);
-    const client = createClient({ chain: testnetBradbury, account });
+    const client = createClient({ chain: studionet, account });
     
     try {
         console.log("Creating Realm...");
