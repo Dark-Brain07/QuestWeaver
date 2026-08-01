@@ -1,4 +1,5 @@
 {
+  "name": "questweaver-app",
   "buildCommand": "cd web && npm install && npm run build",
   "outputDirectory": "web/dist",
   "framework": null
