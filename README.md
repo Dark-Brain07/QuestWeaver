@@ -6,8 +6,8 @@ If a writer submits Lore that fits the Realm's Laws, perfectly aligns with the E
 
 ## 🚀 Live Deployment (Bradbury Testnet)
 
-- **Contract Address:** `0xB5D899dFb87c0BBb1e8FE09D43fcfFC9CF98A96f`
-- **Explorer Link:** [View on GenLayer Explorer](https://explorer-bradbury.genlayer.com/address/0xB5D899dFb87c0BBb1e8FE09D43fcfFC9CF98A96f)
+- **Contract Address:** `0x368afD1D00AcA38C9429D91C6552550FAE99FF67`
+- **Explorer Link:** [View on GenLayer Explorer](https://explorer-bradbury.genlayer.com/address/0x368afD1D00AcA38C9429D91C6552550FAE99FF67)
 
 ---
 
