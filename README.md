@@ -6,8 +6,8 @@ If a writer submits Lore that fits the Realm's Laws, perfectly aligns with the E
 
 ## 🚀 Live Deployment (StudioNet)
 
-- **Contract Address:** `0xEeDb0B417B3134bAEAb50374c0E582E85a5ef693`
-- **Explorer Link:** [View on GenLayer Explorer](https://genlayer-explorer.vercel.app/address/0xEeDb0B417B3134bAEAb50374c0E582E85a5ef693)
+- **Contract Address:** `0x5daB0aeA0B6f28dfc0839307556d7Fe8c6b1BC2f`
+- **Explorer Link:** [View on GenLayer Explorer](https://genlayer-explorer.vercel.app/address/0x5daB0aeA0B6f28dfc0839307556d7Fe8c6b1BC2f)
 
 ---
 

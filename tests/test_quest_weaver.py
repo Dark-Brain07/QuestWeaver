@@ -27,9 +27,6 @@ class _TreeMap:
     def __contains__(self, key):
         return key in self._data
         
-    def exists(self, key):
-        return key in self._data
-        
     def __class_getitem__(cls, item):
         return cls
 

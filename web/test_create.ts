@@ -1,7 +1,7 @@
 import { createClient, createAccount } from "genlayer-js";
 import { studionet } from "genlayer-js/chains";
 
-const CONTRACT = "0xEeDb0B417B3134bAEAb50374c0E582E85a5ef693";
+const CONTRACT = "0x5daB0aeA0B6f28dfc0839307556d7Fe8c6b1BC2f";
 
 async function main() {
     const account = createAccount();

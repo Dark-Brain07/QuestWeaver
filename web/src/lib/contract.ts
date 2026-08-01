@@ -1,7 +1,7 @@
 import { createClient, createAccount } from "genlayer-js";
 import { studionet } from "genlayer-js/chains";
 
-export const CONTRACT: `0x${string}` = "0xEeDb0B417B3134bAEAb50374c0E582E85a5ef693";
+export const CONTRACT: `0x${string}` = "0x5daB0aeA0B6f28dfc0839307556d7Fe8c6b1BC2f";
 export const CHAIN_ID = 61999;
 export const RPC = "https://studio.genlayer.com/api";
 export const EXPLORER = "https://genlayer-explorer.vercel.app";
